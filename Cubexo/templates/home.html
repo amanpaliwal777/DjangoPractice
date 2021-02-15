@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block body %}
+    <div class="row">
+<div class=" col-lg-4 col-md-12 col-sm-12">
+<h2 class="text-center alert alert-success ">Add Student</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Name:</label>
+    <input type="text" name="name" class="form-control" required><br>
+    <label class="t">Phone: (without country code)</label>
+    <input type="tel" name="phone" class="form-control" pattern="[6789][0-9]{9}" required><br>
+    <label class="t">Email:</label>
+    <input type="email" name="email" class="form-control" required><br>
+    <label class="t">Class:</label>
+    <input type="number" name="classes" min="1" max="12" class="form-control" required><br>
+    <label class="t">Division:</label>
+    &nbsp;&nbsp;<label class="t">A:</label>&nbsp;<input type="radio" name="division" checked value="A" class="form-check-input">
+    &nbsp;&nbsp;<label class="t">B:</label>&nbsp;<input type="radio" name="division" value="B" class="form-check-input">
+    &nbsp;&nbsp;<label class="t">C:</label>&nbsp;<input type="radio" name="division" value="C" class="form-check-input">
+    &nbsp;&nbsp;<label class="t">D:</label>&nbsp;<input type="radio" name="division" value="D" class="form-check-input">
+    <br><br><label class="t">Age:</label>
+    <input type="number" name="age" min="1" max="150" class="form-control" required><br>
+    <center>
+        <input type="submit" value="Submit" class="btn btn-success" >
+        <input type="reset" value="Clear" class="btn btn-danger" >
+    </center>
+    <br>
+
+</form>
+</div>
+<div class="col-md-12 col-sm-12 col-lg-8">
+
+
+{% if students %}
+    <center><a href="{% url 'search' %}" style="text-decoration: none" class="btn  btn-info btn-sm">Search Student</a></center>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td>Class</td>
+            <td>Division</td>
+            <td>Age</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.classes }}</td>
+                <td>{{ student.division }}</td>
+                <td>{{ student.age }}</td>
+                <td>
+                <a href="{% url 'update' student.id %}" class="btn-success btn btn-sm">Edit</a>
+                <form method="post" action="{% url 'delete' student.id %}" class="d-inline">
+                    {% csrf_token %}
+                        <input type="submit"value="Delete" class="btn btn-sm btn-danger">
+                </form>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h1>No student found</h1>
+{% endif %}
+</div>
+</div>
+
+
+{% endblock body %}

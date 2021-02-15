@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block body %}
+    <div class="row">
+<div class="col-md-4">
+<h2 class="text-center alert alert-success ">Register Your Self</h2>
+<form method="post">
+
+    {{ ff }}
+    {% csrf_token %}
+    <br>
+    <input type="submit" class="btn btn-success btn-sm">
+
+</form>
+</div>
+<div class=" col-md-8">
+
+{% if students %}
+<h3 class="text-center alert bg-danger">Some records found</h3>
+    <table class="table">
+
+    <tr>
+        <td>ID</td>
+        <td>NAME</td>
+        <td>EMAIL</td>
+        <td>PASSWORD</td>
+        <td>Action</td>
+    </tr>
+
+    <tbody>
+{% for student in students %}
+            <tr>
+            <td >{{ student.id }} </td>
+            <td >{{ student.name }} </td>
+            <td >{{ student.email }} </td>
+            <td >{{ student.password }} </td>
+            <td>
+                <a href="{% url 'update' student.id %}" class="btn-success btn btn-sm">Edit</a>
+                <form method="post" action="{% url 'delete' student.id %}" class="d-inline">
+                    {% csrf_token %}
+                        <input type="submit"value="Delete" class="btn btn-sm btn-danger">
+                </form>
+            </td>
+
+            </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <h4 class="text-center alert bg-danger">No record found</h4>
+{% endif %}
+</div>
+</div>
+
+
+{% endblock body %}

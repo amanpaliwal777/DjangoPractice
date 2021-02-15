@@ -1,0 +1,17 @@
+{% extends 'projectapp/base.html' %}
+
+{% block title %}
+home page
+{% endblock %}
+
+{% block body %}
+<h1> it is home page </h1>
+{% endblock %}
+
+{% block demo %}
+    {{ block.super }}
+    home with demo
+
+    {% include 'projectapp/inc.html' %}
+
+{% endblock %}

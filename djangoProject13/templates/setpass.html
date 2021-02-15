@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Password</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    {% endif %}
+    {% for f in form %}
+        {{ f.label_tag }} {{ f }} {{ f.errors|striptags }} <br><br>
+    {% endfor %}
+    <input type="submit" value="Set Password">
+
+</form>
+
+<a href="{% url 'profile' %}">Profile</a>
+<a href="{% url 'logout' %}">Logout</a>
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{{ students }}
+<h1>Student Details</h1>
+
+{% if students %}
+
+    {% for student in students %}
+        {{ student.student_name }}
+        {{ student.student_class }}
+       p: {{ student.student_subject }}
+        {{ student.student_marks }}
+    {% endfor %}
+
+
+{% else %}
+    <h1>no students found</h1>
+{% endif %}
+</body>
+</html>

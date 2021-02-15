@@ -1,0 +1,23 @@
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% if forms.non_field_errors %}
+        {% for error in forms.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    {% endif %}
+    {% for form in forms %}
+        {{ form.label_tag }}{{ form }}{{ form.errors }}<br><br>
+    {% endfor %}
+    <input type="submit">
+</form>
+
+<br><br>
+<a href="{% url 'print' %}">printing method</a>
+<br><br>
+
+<a href="{% url 'login' %}">Login</a> <br>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}

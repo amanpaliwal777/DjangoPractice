@@ -1,0 +1,1 @@
+userlogin, logout, messages, getting username, authenticate user

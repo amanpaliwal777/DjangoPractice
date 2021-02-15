@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    
+    {% endblock %}</title>
+</head>
+<body>
+
+<a href="{% url 'home' %}">home</a>
+<a href="{% url 'django' %}">django</a>
+<a href="{% url 'python' %}">python</a>
+{% block body %}
+{% endblock %}
+
+{% block demo %}
+demo tag
+{% endblock %}
+</body>
+</html>

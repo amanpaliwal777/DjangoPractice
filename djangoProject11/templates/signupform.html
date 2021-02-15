@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>signup form</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {% for f in ff %}
+        {{ f.label_tag }} {{ f }} {{ f.errors|striptags }}
+<br><br>
+    {% endfor %}
+<input type="submit">
+
+</form>
+
+{% for message in messages %}
+    {{ message }}
+
+{% endfor %}
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+Update / Edit
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+    <div class="offset-4 col-md-4">
+        <form method="post" action="{% url 'update' s.id %}">
+        {% csrf_token %}
+            <label>Name:</label>
+            <input type="text" name="name" class="form-control" value="{{ s.name }}" required><br>
+            <label class="t">Phone: (without country code)</label>
+            <input type="tel" name="phone" class="form-control" pattern="[6789][0-9]{9}" value="{{ s.phone }}" required><br>
+            <label class="t">Email:</label>
+            <input type="email" name="email" class="form-control" value="{{ s.email }}"  required><br>
+            <label class="t">Class:</label>
+            <input type="number" name="classes" min="1" max="12" value="{{ s.classes }}" class="form-control" required><br>
+            <label class="t">Division:</label>
+            &nbsp;&nbsp;<label class="t">A:</label>&nbsp;<input type="radio" name="division" value="A" class="form-check-input" {% if s.division == 'A' %}checked{% endif %}>
+            &nbsp;&nbsp;<label class="t">B:</label>&nbsp;<input type="radio" name="division" value="B" class="form-check-input" {% if s.division == 'B' %}checked{% endif %}>
+            &nbsp;&nbsp;<label class="t">C:</label>&nbsp;<input type="radio" name="division" value="C" class="form-check-input" {% if s.division == 'C' %}checked{% endif %}>
+            &nbsp;&nbsp;<label class="t">D:</label>&nbsp;<input type="radio" name="division" value="D" class="form-check-input" {% if s.division == 'D' %}checked{% endif %}>
+            <br><br><label class="t">Age:</label>
+            <input type="number" name="age" min="1" max="150" value="{{ s.age }}" class="form-control" required><br>
+            <center>
+                <input type="submit" value="Submit" class="btn btn-success" >
+                <input type="reset" value="Clear" class="btn btn-danger" >
+            </center>
+            <br>
+        </form>
+    </div>
+    </div>
+{% endblock %}
+

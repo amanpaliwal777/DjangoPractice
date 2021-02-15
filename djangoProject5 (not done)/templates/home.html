@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+
+<form novalidate method="post" >
+    {% csrf_token %}
+    {{ ff.as_p }}
+    <input type="submit" value="send">
+</form>
+</body>
+</html>

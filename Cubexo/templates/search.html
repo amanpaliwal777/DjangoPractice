@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}
+Search Student
+{% endblock %}
+
+{% block body %}
+{% if students %}
+    <div class="row">
+        <div class="offset-4 col-md-4">
+         <form method="post">
+            {% csrf_token %}
+        <label>Class:</label>
+        <input type="number" min="1" max="12" name="classes" class="form-control" required>
+        <label>Division:</label>
+        <input type="text"  maxlength="1" name="division" class="form-control" required>
+             <br>
+             <input type="submit" value="Search" class="btn btn-success">
+    </form>
+        </div>
+    </div>
+
+
+
+<table class="table text-center table-hover">
+        <thead class="">
+        <tr>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td>Class</td>
+            <td>Division</td>
+            <td>Age</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.classes }}</td>
+                <td>{{ student.division }}</td>
+                <td>{{ student.age }}</td>
+                <td>
+                <a href="{% url 'update' student.id %}" class="btn-success btn btn-sm">Edit</a>
+                <form method="post" action="{% url 'delete' student.id %}" class="d-inline">
+                    {% csrf_token %}
+                        <input type="submit"value="Delete" class="btn btn-sm btn-danger">
+                </form>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <h1>No student found</h1>
+{% endif %}
+    <a href="{% url 'home'%}" class="btn btn-primary"> Back to Home</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+{% endif %}
+
+<h1>This is user profile</h1>
+
+{{ name }}<br><br>
+{% if statements %}
+    <h1>Statements</h1>
+    <table border="1px solid black">
+    <thead>
+        <tr>
+            <td>Name of user</td>
+            <td>Total balance</td>
+            <td>Balance</td>
+            <td>Debit/Credit</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for statement in statements %}
+        <tr>
+            <td>{{ statement.user.username }}</td>
+            <td>{{ statement.bal }}</td>
+            <td>{{ statement.totalbal }}</td>
+            <td>{% if statement.inde == 'i' %}
+            credit
+            {% elif statement.inde == 'd' %}
+                debit
+            {% endif %} </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+<br><br>
+<form method="post">
+    {% csrf_token %}
+    <label>Amount:</label>
+    <input type="number" min="1" max="999999" name="balance" required><br>
+    <label>Increment</label>
+    <input type="radio" value="i" name="inde" required><br>
+    <label>Decrement</label>
+    <input type="radio" value="d" name="inde" required><br>
+    <input type="submit">
+</form>
+
+
+
+
+<br>
+<a href="{% url 'logout' %}">Log-out</a>
+
+<br><br>
+<a href="{% url 'print' %}">printing method</a>

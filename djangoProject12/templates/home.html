@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {% if ff.non_field_errors %}
+        {% for error in ff.non_field_errors %}
+            <p>{{ error }}</p>
+
+        {% endfor %}
+
+
+    {% endif %}
+    {% for f in ff %}
+        {{ f.label_tag }} {{ f }} {{ f.errors|striptags }} <br><br>
+    {% endfor %}
+    <input type="submit">
+
+</form>
+{% if messages %}
+    {% for message in messages %}
+        <p {% if message.tags %}
+            class="{{ message.tags }}"
+        {% endif %} >
+        {{ message }}
+        </p>
+
+    {% endfor %}
+
+
+{% endif %}
+<br>
+<a href="{% url 'login' %}">Login</a>
+</body>
+</html>

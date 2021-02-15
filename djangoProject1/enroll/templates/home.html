@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+home page
+{% endblock %}
+
+{% block b1  %}
+
+{{ ffm.as_p }}
+<hr>
+
+{% for foo in ffm %}
+    {{ foo.label_tag }}
+    {{ foo.label }}
+    {{ foo   }}
+
+{% endfor %}
+
+{% endblock %}
